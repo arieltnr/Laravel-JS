@@ -36,7 +36,7 @@
                             <th>Jumlah Terjual</th>
                             <th>Tanggal Transaksi</th>
                             <th>Jenis Barang</th>
-                            <th>Hapus</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
