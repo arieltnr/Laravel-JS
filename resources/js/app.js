@@ -15,7 +15,7 @@ function dateTime(datetime) {
 }
 
 function showAllData() {
-    const url = 'http://localhost:8000/api/barangs/';
+    const url = `${window.apiBaseUrl}/barangs/`;
     $.ajax({
         url: url,
         type: "GET",
@@ -64,7 +64,7 @@ function createTable(barangs) {
 }
 
 function addData(formData) {
-    const url = 'http://localhost:8000/api/barangs/';
+    const url = `${window.apiBaseUrl}/barangs/`;
     $.ajax({
         url: url,
         type: "POST",
@@ -85,7 +85,7 @@ function addData(formData) {
 }
 
 function deleteData(id) {
-    const url = `http://localhost:8000/api/barangs/${id}`;
+    const url = `${window.apiBaseUrl}/barangs/${id}`;
     $.ajax({
         url: url,
         type: "DELETE",

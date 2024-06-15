@@ -5,7 +5,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Laravel</title>
+    
     @vite('resources/css/app.css') {{-- Include CSS --}}
+
+    <script>
+        window.apiBaseUrl = @json(config('api.base_url'));
+    </script>
+    
 </head>
 
 <body class="antialiased">
