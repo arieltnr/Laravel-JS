@@ -1,0 +1,167 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Documentasi API",
+        "description": "Documentation API untuk operasi CRUD Barang dengan Laravel",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000",
+            "description": "Local Development Server"
+        }
+    ],
+    "paths": {
+        "/api/barangs": {
+            "get": {
+                "tags": [
+                    "Projects"
+                ],
+                "operationId": "383e18058d75cd3684133063eb29f13d",
+                "responses": {
+                    "200": {
+                        "description": "Display a listing of barangs."
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Projects"
+                ],
+                "operationId": "1a875a3b99768bc195a3558147ca2b71",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nama_barang": {
+                                        "type": "string"
+                                    },
+                                    "stok": {
+                                        "type": "integer"
+                                    },
+                                    "jml_jual": {
+                                        "type": "integer"
+                                    },
+                                    "tgl_transaksi": {
+                                        "type": "string",
+                                        "format": "timestamp"
+                                    },
+                                    "jenis_barang": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Create a new item."
+                    }
+                }
+            }
+        },
+        "/api/barangs/{id_barang}": {
+            "get": {
+                "tags": [
+                    "Projects"
+                ],
+                "operationId": "296f7130322a3c9eb4a19df3d214085e",
+                "parameters": [
+                    {
+                        "name": "id_barang",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Display the specified item."
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Projects"
+                ],
+                "operationId": "f5f1799f48618a02d4fb9b26d2b03e5e",
+                "parameters": [
+                    {
+                        "name": "id_barang",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nama_barang": {
+                                        "type": "string"
+                                    },
+                                    "stok": {
+                                        "type": "integer"
+                                    },
+                                    "jml_jual": {
+                                        "type": "integer"
+                                    },
+                                    "tgl_transaksi": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "jenis_barang": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Update the specified item."
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Projects"
+                ],
+                "operationId": "707270610d4cfaaabea06780d2cfddf5",
+                "parameters": [
+                    {
+                        "name": "id_barang",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Delete the specified item."
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Projects",
+            "description": "API Endpoints of Projects"
+        }
+    ]
+}
