@@ -59,7 +59,9 @@ function createTable(barangs) {
     $('#barangTable').DataTable(); // Initialize DataTables plugin
     $('.deleteBtn').click(function () {
         var id = $(this).data('id');
-        deleteData(id);
+        if (confirm('Hapus Barang Ini?')) {
+            deleteData(id);
+        }
     });
 }
 
