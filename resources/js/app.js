@@ -14,6 +14,11 @@ function dateTime(datetime) {
     return formattedToday;
 }
 
+function parseDate(dateStr) {
+    var parts = dateStr.split('-');
+    return new Date(parts[2], parts[1] - 1, parts[0]); // Convert to Date object
+}
+
 function showAllData() {
     const url = `${window.apiBaseUrl}/barangs/`;
     $.ajax({
@@ -57,30 +62,24 @@ function showDataBy(id) {
 }
 
 function createTable(barangs) {
-    var tableBody = $('#barangTable tbody');
-    tableBody.empty(); // Clear any existing data
+    var tableBody = $('#barangTable').DataTable();
+    tableBody.clear().draw(); // Clear existing data
 
     barangs.forEach(function (item, idx) {
         let no = idx + 1;
         let tgltransaksi = dateTime(item.tgl_transaksi);
 
-        var row = `<tr>
-            <td>${no}</td>
-            <td>${item.nama_barang}</td>
-            <td>${item.stok}</td>
-            <td>${item.jml_jual}</td>
-            <td>${tgltransaksi}</td>
-            <td>${item.jenis_barang}</td>
-            <td>
-                <button class="btn btn-primary editBtn" data-id="${item.id}">Edit</button>
-                <button class="btn btn-danger deleteBtn" data-id="${item.id}">Hapus</button>
-            </td>
-        </tr>`;
-
-        tableBody.append(row);
+        tableBody.row.add([
+            no,
+            item.nama_barang,
+            item.stok,
+            item.jml_jual,
+            tgltransaksi,
+            item.jenis_barang,
+            `<button class="btn btn-danger deleteBtn" data-id="${item.id}">Hapus</button>
+             <button class="btn btn-primary editBtn" data-id="${item.id}">Edit</button>`
+        ]).draw(false);
     });
-
-    $('#barangTable').DataTable(); // Initialize DataTables plugin
 
     $('.deleteBtn').click(function () {
         var id = $(this).data('id');
@@ -167,6 +166,9 @@ function populateForm(data) {
 }
 
 $(document).ready(function () {
+
+    var table = $('#barangTable').DataTable();
+
     showAllData();
 
     $('#addForm').submit(function (event) {
@@ -205,4 +207,37 @@ $(document).ready(function () {
         const isUpdate = formData.id ? true : false;
         addData(formData, isUpdate);
     });
+
+    // Custom filtering function which will search data in the "Tanggal Transaksi" column
+    $.fn.dataTable.ext.search.push(
+        function (settings, data, dataIndex) {
+            var minDateStr = $('#minDate').val();
+            var maxDateStr = $('#maxDate').val();
+            var transactionDateStr = data[4]; // Assuming the "Tanggal Transaksi" column is at index 4
+
+            if (minDateStr && maxDateStr) {
+                var minDate = new Date(minDateStr);
+                var maxDate = new Date(maxDateStr);
+                var transactionDate = parseDate(transactionDateStr);
+
+                return transactionDate >= minDate && transactionDate <= maxDate;
+            } else if (minDateStr) {
+                var minDate = new Date(minDateStr);
+                var transactionDate = parseDate(transactionDateStr);
+
+                return transactionDate >= minDate;
+            } else if (maxDateStr) {
+                var maxDate = new Date(maxDateStr);
+                var transactionDate = parseDate(transactionDateStr);
+
+                return transactionDate <= maxDate;
+            }
+            return true;
+        }
+    );
+
+    $('#minDate, #maxDate').change(function () {
+        table.draw();
+    });
+    
 });

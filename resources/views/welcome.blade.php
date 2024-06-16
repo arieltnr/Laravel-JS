@@ -26,6 +26,15 @@
                 <h3>Daftar Barang</h3>
             </center>
 
+            <div id="dateRangeContainer" class="col-md-6">
+                <label for="minDate">Start Date:</label>
+                <input class="form-control" type="date" id="minDate" name="minDate">
+            </div>
+            <div class="col-md-6">
+                <label for="maxDate">End Date:</label>
+                <input class="form-control" type="date" id="maxDate" name="maxDate">
+            </div>
+            
             <div id="tableContainer">
                 <table class="table" id="barangTable">
                     <thead>
@@ -36,7 +45,7 @@
                             <th>Jumlah Terjual</th>
                             <th>Tanggal Transaksi</th>
                             <th>Jenis Barang</th>
-                            <th>Aksi</th>
+                            <th id="aksi">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>

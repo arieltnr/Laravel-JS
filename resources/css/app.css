@@ -22,6 +22,10 @@ th {
     background-color: #f2f2f2;
 }
 
+#aksi {
+    width: 172px;
+}
+
 .form-container {
     display: none; /* Initially hide the form */
 }
