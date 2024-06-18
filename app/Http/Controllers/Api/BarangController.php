@@ -6,7 +6,6 @@ use App\Models\Barang;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\BarangResource;
 use Illuminate\Support\Facades\Validator;
 
 
